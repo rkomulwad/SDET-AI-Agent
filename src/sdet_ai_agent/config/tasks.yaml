@@ -1,0 +1,56 @@
+generate_test_cases:
+  description: >
+    Generate a comprehensive set of test cases based on the provided API specification. Include positive, negative, and boundary value tests, covering all endpoints, parameters, request/response bodies, and data types.
+    Consider the following test case categories:
+      1. Positive Tests:** Valid inputs and expected outputs.
+      2. Negative Tests:** Invalid inputs (e.g., incorrect data types, missing required fields).
+
+  expected_output: >
+        Format the test cases as a table with the following columns: Test Case ID, Description, Test Type.
+
+        Example:
+        | Test Case ID | Description | Test Type |
+        |---|---|---|
+        | TC_001 | Valid request with all required fields | Positive |
+
+        Output the test cases in markdown table format.
+  agent: test_designer
+
+generate_edge_test_cases:
+  description: >
+    Identify potential edge cases and unusual scenarios that might not be covered by standard positive and negative tests for the given API specification.
+    Consider the following test case categories:
+      1. Boundary Value Tests:** Inputs at the limits of valid ranges.
+      2. Edge Cases:** Unexpected or unusual inputs or conditions that might cause errors.
+
+  expected_output: >
+        Format the test cases as a table with the following columns: Test Case ID, Description.
+
+        Example:
+        | Test Case ID | Description |
+        |---|---|
+        | TC_036 | Place order with a very large quantity |
+
+        Output the test cases in markdown table format.
+  agent: test_designer
+
+generate_test_code:
+  description: >
+    Generate API Contract tests using Postman test scripts using JavaScript.
+    Consider the following:
+      *   Use `pm.test()` to define test cases.
+      *   Use appropriate `pm.expect()` assertions to verify the expected output, including status codes, response bodies, headers, etc.
+      *   Include necessary setup and teardown steps (if applicable).
+      *   Handle different data types correctly (e.g., JSON, arrays, etc.).
+      *   Use `pm.environment.set()` or `pm.globals.set()` for setting environment or global variables if needed.
+     
+  expected_output: >
+    Complete, runnable test code that corresponds to the provided test case. The code should be well-formatted, adhere to best practices, and be ready for execution within the target testing environment. The output should be only the code, without any additional explanations or surrounding text.
+     sample:
+        # Example of a Postman contract test in Javascript
+        pm.test('Response adheres to contract', function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property('id');
+          pm.expect(jsonData).to.have.property('name');
+        });
+  agent: test_case_coder  

@@ -1,0 +1,22 @@
+[project]
+name = "sdet_ai_agent"
+version = "0.1.0"
+description = "SDET-AI-Agent using crewAI"
+authors = [{ name = "Rakesh Komulwad", email = "rkomulwad@gmail.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.95.0,<1.0.0",
+    "prance (>=23.6.21.0,<24.0.0.0)",
+    "openapi-spec-validator (>=0.7.1,<0.8.0)",
+]
+
+[project.scripts]
+sdet_ai_agent = "sdet_ai_agent.main:run"
+run_crew = "sdet_ai_agent.main:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

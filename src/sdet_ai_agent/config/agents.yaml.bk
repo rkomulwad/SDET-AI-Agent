@@ -1,0 +1,149 @@
+agents:
+  - name: test_designer
+    description: "Generates comprehensive test cases and identifies edge cases from API specifications."
+    tasks:
+      - name: generate_test_cases
+        description: "Generate functional and negative test cases from API specs."
+        inputs:
+          - api_spec: "Path to the API specification file (Swagger/OpenAPI)."
+        outputs:
+          - test_cases: "List of generated test cases."
+      - name: identify_edge_cases
+        description: "Identify edge and boundary test cases."
+        inputs:
+          - api_schema: "API schema or specification as a JSON object."
+        outputs:
+          - edge_cases: "List of edge cases for testing."
+
+  - name: test_automation
+    description: "Creates and optimizes automated test scripts for API testing."
+    tasks:
+      - name: create_test_script
+        description: "Generate reusable test scripts for API endpoints."
+        inputs:
+          - endpoint: "API endpoint URL."
+          - method: "HTTP method (GET, POST, etc.)."
+          - params: "Request parameters."
+          - assertions: "Expected outcomes (e.g., status code)."
+        outputs:
+          - test_script: "Automated test script in the specified framework."
+      - name: optimize_test_script
+        description: "Optimize existing test scripts for efficiency and reusability."
+        inputs:
+          - test_script: "Test script to optimize."
+        outputs:
+          - optimized_script: "Improved and reusable test script."
+
+  - name: test_mocking
+    description: "Provides mock APIs and virtual environments for testing."
+    tasks:
+      - name: generate_mock_server
+        description: "Generate a mock server based on API specifications."
+        inputs:
+          - api_spec: "Path to the API specification file."
+        outputs:
+          - mock_server: "Mock server configuration."
+      - name: simulate_mock_response
+        description: "Simulate responses for mock APIs."
+        inputs:
+          - endpoint: "API endpoint for which to simulate response."
+          - response: "Expected mock response object."
+        outputs:
+          - simulation: "Simulated response details."
+
+  - name: test_execution
+    description: "Executes API tests and provides detailed test reports."
+    tasks:
+      - name: run_api_test
+        description: "Execute API tests and collect results."
+        inputs:
+          - test_suite: "List of test cases to execute."
+        outputs:
+          - results: "Test results, including success/failure rates."
+      - name: analyze_test_failures
+        description: "Analyze failed tests and provide actionable debugging insights."
+        inputs:
+          - error_logs: "Logs generated during test failures."
+        outputs:
+          - analysis: "Root cause analysis and recommendations."
+
+  - name: performance_testing
+    description: "Conducts performance testing and provides optimization suggestions."
+    tasks:
+      - name: run_performance_test
+        description: "Run performance tests on API endpoints."
+        inputs:
+          - api_url: "URL of the API to test."
+          - load: "Number of users for load testing."
+        outputs:
+          - performance_results: "Results of the performance test."
+      - name: analyze_performance_metrics
+        description: "Analyze performance metrics to identify bottlenecks."
+        inputs:
+          - metrics: "Performance metrics such as latency and throughput."
+        outputs:
+          - analysis: "Detailed performance analysis report."
+
+  - name: ci_cd
+    description: "Integrates API tests into CI/CD pipelines and monitors results."
+    tasks:
+      - name: configure_ci_cd_pipeline
+        description: "Configure CI/CD pipeline for automated testing."
+        inputs:
+          - tool: "CI/CD tool to use (e.g., Jenkins, GitHub Actions)."
+          - test_suite: "List of test cases to integrate into the pipeline."
+        outputs:
+          - configuration: "Pipeline configuration details."
+      - name: monitor_pipeline_results
+        description: "Monitor test results from CI/CD pipelines."
+        inputs:
+          - build_id: "ID of the pipeline build."
+        outputs:
+          - pipeline_status: "Status of the build and test execution."
+
+  - name: error_monitoring
+    description: "Monitors errors, analyzes logs, and tracks trends for debugging."
+    tasks:
+      - name: analyze_error_logs
+        description: "Analyze logs to identify the root cause of failures."
+        inputs:
+          - logs: "Error logs generated during test execution."
+        outputs:
+          - analysis: "Root cause analysis report."
+      - name: track_error_trends
+        description: "Monitor trends in API errors over time."
+        inputs:
+          - api_usage: "API usage and error data."
+        outputs:
+          - trends: "Error trends and actionable insights."
+
+  - name: documentation
+    description: "Generates reports and maintains documentation for API testing."
+    tasks:
+      - name: generate_test_report
+        description: "Generate a detailed report of test results."
+        inputs:
+          - test_results: "Test results to include in the report."
+        outputs:
+          - report: "Generated test report in the desired format."
+      - name: document_best_practices
+        description: "Document API testing best practices."
+        inputs:
+          - test_strategy: "List of best practices or strategies."
+        outputs:
+          - documentation: "Generated documentation for best practices."
+
+  - name: tool_recommendation
+    description: "Recommends tools and strategies for API testing."
+    tasks:
+      - name: recommend_testing_tools
+        description: "Suggest tools based on user requirements."
+        inputs:
+          - requirements: "Details of API testing requirements."
+        outputs:
+          - tools: "Recommended tools for API testing."
+      - name: highlight_latest_trends
+        description: "Provide insights into the latest trends in API testing."
+        inputs: []
+        outputs:
+          - trends: "Latest trends in API testing."

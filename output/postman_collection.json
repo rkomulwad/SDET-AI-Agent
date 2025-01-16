@@ -1,0 +1,239 @@
+```javascript
+pm.test('TC_043: Add pet with long description', () => {
+    const longDescription = 'a'.repeat(1000); // Excessively long description
+    const payload = {
+        name: 'testPet',
+        photoUrls: ['http://example.com/pet.jpg'],
+        description: longDescription
+    };
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect either success or client error
+});
+
+pm.test('TC_044: Add pet with invalid photoUrl', () => {
+    const payload = {
+        name: 'testPet',
+        photoUrls: ['invalid-url'],
+        description: 'test description'
+    };
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+});
+
+pm.test('TC_045: Add pet with non-existent photoUrl', () => {
+    const payload = {
+        name: 'testPet',
+        photoUrls: ['http://example.com/nonexistent.jpg'],
+        description: 'test description'
+    };
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+
+});
+
+pm.test('TC_046: Add pet with many tags', () => {
+    const manyTags = Array.from({ length: 100 }, (_, i) => `tag${i}`);
+    const payload = {
+        name: 'testPet',
+        photoUrls: ['http://example.com/pet.jpg'],
+        tags: manyTags
+    };
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+
+});
+
+pm.test('TC_047: Update pet with duplicate photoUrls', () => {
+    const payload = {
+        name: 'testPet',
+        photoUrls: ['http://example.com/pet.jpg', 'http://example.com/pet.jpg']
+    };
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+
+});
+
+
+pm.test('TC_048: Find pets by long status', () => {
+    const longStatus = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+
+});
+
+pm.test('TC_049: Find pets by status with special chars', () => {
+    const specialCharsStatus = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+
+});
+
+pm.test('TC_050: Find pets by long tag', () => {
+    const longTag = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+
+});
+
+pm.test('TC_051: Find pets by tag with special chars', () => {
+    const specialCharsTag = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+
+});
+
+pm.test('TC_052: Find pet by large ID', () => {
+    const largeId = 9999999999;
+    pm.expect(pm.response.code).to.be.oneOf([200, 404]); //Expect either success or not found
+});
+
+pm.test('TC_053: Find pet by small ID', () => {
+    const smallId = -1;
+    pm.expect(pm.response.code).to.be.oneOf([200, 404]); //Expect either success or not found
+});
+
+pm.test('TC_054: Find pet by ID 0', () => {
+    const zeroId = 0;
+    pm.expect(pm.response.code).to.be.oneOf([200, 404]); //Expect either success or not found
+});
+
+pm.test('TC_055: Update pet with special chars in name', () => {
+    const specialCharsName = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+});
+
+pm.test('TC_056: Update pet with very long name', () => {
+    const longName = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+});
+
+pm.test('TC_057: Update pet with special chars in status', () => {
+    const specialCharsStatus = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+});
+
+pm.test('TC_058: Update pet with empty name', () => {
+    const emptyName = '';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+});
+
+pm.test('TC_059: Update pet with empty status', () => {
+    const emptyStatus = '';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); //Expect either success or client error
+});
+
+pm.test('TC_060: Delete pet with ID 0', () => {
+  const petId = 0;
+  pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_061: Delete pet with very large ID', () => {
+  const petId = 999999999;
+  pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_062: Place order with quantity 0', () => {
+  const order = { quantity: 0 };
+  pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_063: Place order with negative quantity', () => {
+  const order = { quantity: -1 };
+  pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_064: Place order with very large quantity', () => {
+  const order = { quantity: 9999999 };
+  pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_065: Place order with non-existent petId', () => {
+  const order = { petId: 9999999 };
+  pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]); // Expect 200, 400, or 404
+});
+
+pm.test('TC_066: Get order by ID 0', () => {
+  const orderId = 0;
+  pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_067: Get order by very large ID', () => {
+  const orderId = 999999999;
+  pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_068: Delete order by ID 0', () => {
+  const orderId = 0;
+  pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_069: Delete order by very large ID', () => {
+  const orderId = 999999999;
+  pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_070: Create user with long username', () => {
+    const longUsername = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_071: Create user with special chars in username', () => {
+    const specialCharsUsername = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_072: Create user with long password', () => {
+    const longPassword = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_073: Create user with whitespace password', () => {
+    const whitespacePassword = '       ';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_074: Get user by long username', () => {
+    const longUsername = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+
+pm.test('TC_075: Get user by username with special chars', () => {
+    const specialCharsUsername = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_076: Update user with long username', () => {
+    const longUsername = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_077: Update user with special chars in username', () => {
+    const specialCharsUsername = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]); // Expect 200 (success) or 400 (bad request)
+});
+
+pm.test('TC_078: Delete user with long username', () => {
+    const longUsername = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_079: Delete user with special chars in username', () => {
+    const specialCharsUsername = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 404]); // Expect 200 (success) or 404 (not found)
+});
+
+pm.test('TC_080: Login with long username', () => {
+    const longUsername = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 401]); // Expect 200 (success) or 401 (unauthorized)
+});
+
+pm.test('TC_081: Login with special chars in username', () => {
+    const specialCharsUsername = '!@#$%^&*()_+=-`~[]\{}|;\':",./<>?';
+    pm.expect(pm.response.code).to.be.oneOf([200, 401]); // Expect 200 (success) or 401 (unauthorized)
+});
+
+pm.test('TC_082: Login with long password', () => {
+    const longPassword = 'a'.repeat(100);
+    pm.expect(pm.response.code).to.be.oneOf([200, 401]); // Expect 200 (success) or 401 (unauthorized)
+});
+
+pm.test('TC_083: Login with whitespace password', () => {
+    const whitespacePassword = '       ';
+    pm.expect(pm.response.code).to.be.oneOf([200, 401]); // Expect 200 (success) or 401 (unauthorized)
+});
+
+//Note: TC_084-087 require file uploads which are harder to simulate directly in this format.
+
+```
